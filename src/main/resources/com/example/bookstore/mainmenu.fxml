@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bookstore.MainMenuController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;">
+         <children>
+            <Button fx:id="addbook_nav_btn" layoutX="137.0" layoutY="121.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="346.0" style="-fx-background-color: blue;" text="Add Books" textFill="WHITE" />
+            <Button fx:id="managein_nav_btn" layoutX="137.0" layoutY="208.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="346.0" style="-fx-background-color: blue;" text="Manage Inventory" textFill="WHITE" />
+            <Button fx:id="sales_nav_btn" layoutX="137.0" layoutY="286.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="346.0" style="-fx-background-color: blue;" text="Sales" textFill="WHITE" />
+            <Button fx:id="logoffbtn" layoutX="534.0" layoutY="11.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="59.0" style="-fx-background-color: red;" text="Log off" textFill="WHITE" />
+            <Text fill="WHITE" layoutX="235.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
