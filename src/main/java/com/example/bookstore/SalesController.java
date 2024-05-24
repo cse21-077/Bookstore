@@ -1,5 +1,8 @@
 package com.example.bookstore;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,9 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -29,15 +29,10 @@ public class SalesController {
     private TextField total_txt;
 
     private MySQLDatabaseConnection dbConnection;
-    private int currentUserId; // User ID of the logged-in user
 
     public SalesController() {
         dbConnection = new MySQLDatabaseConnection();
         dbConnection.connect();
-    }
-
-    public void setCurrentUserId(int userId) {
-        this.currentUserId = userId;
     }
 
     @FXML
@@ -50,16 +45,15 @@ public class SalesController {
     private void loadSoldItems() {
         ObservableList<String> soldItems = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM soldbooks WHERE user_id = ?";
+        String sql = "SELECT * FROM soldbooks";
 
         try {
             var preparedStatement = dbConnection.getConnection().prepareStatement(sql);
-            preparedStatement.setInt(1, currentUserId);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String item = rs.getString("title") + " by " + rs.getString("author") +
                         " - Genre: " + rs.getString("genre") +
-                        ", Price: $" + rs.getDouble("price") +
+                        ", Price: P" + rs.getDouble("price") +
                         ", Quantity: " + rs.getInt("quantity");
                 soldItems.add(item);
             }
@@ -73,11 +67,10 @@ public class SalesController {
     private void calculateAndDisplayTotalRevenue() {
         double totalRevenue = 0.0;
 
-        String sql = "SELECT price, quantity FROM soldbooks WHERE user_id = ?";
+        String sql = "SELECT price, quantity FROM soldbooks";
 
         try {
             var preparedStatement = dbConnection.getConnection().prepareStatement(sql);
-            preparedStatement.setInt(1, currentUserId);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 double price = rs.getDouble("price");

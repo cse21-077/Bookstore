@@ -143,8 +143,7 @@ public class BookController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("purchasehistory.fxml"));
             Parent root = loader.load();
 
-            PurchaseHistoryController purchaseHistoryController = loader.getController();
-            purchaseHistoryController.setCurrentUserId(currentUserId);
+
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

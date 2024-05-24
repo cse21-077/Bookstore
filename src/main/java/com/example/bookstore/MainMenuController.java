@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainMenuController {
 
@@ -27,14 +28,14 @@ public class MainMenuController {
     @FXML
     private void initialize() {
         addbook_nav_btn.setOnAction(event -> navigateTo(event, "addbook.fxml"));
-        sales_nav_btn.setOnAction(event -> navigateTo(event, "Sales.fxml"));
+        sales_nav_btn.setOnAction(event -> navigateTo(event, "sales.fxml"));
         managein_nav_btn.setOnAction(event -> navigateTo(event, "inventory.fxml"));
         logoffbtn.setOnAction(event -> navigateTo(event, "hello-view.fxml"));
     }
 
     private void navigateTo(ActionEvent event, String fxmlFile) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

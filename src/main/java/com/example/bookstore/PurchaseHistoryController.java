@@ -1,6 +1,5 @@
 package com.example.bookstore;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,10 +14,10 @@ public class PurchaseHistoryController {
     private ListView<String> historylist;
 
     private MySQLDatabaseConnection dbConnection;
-    private int currentUserId;
 
     public PurchaseHistoryController() {
         dbConnection = new MySQLDatabaseConnection();
+        dbConnection.connect(); // Ensure connection is established in constructor
     }
 
     @FXML
@@ -26,21 +25,11 @@ public class PurchaseHistoryController {
         loadPurchaseHistory();
     }
 
-    public void setCurrentUserId(int userId) {
-        this.currentUserId = userId;
-        loadPurchaseHistory();
-    }
-
     private void loadPurchaseHistory() {
-        if (currentUserId == 0) return;
-
         ObservableList<String> purchaseHistory = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM soldbooks";
 
-        String sql = "SELECT * FROM soldbooks WHERE user_id = ?";
-
-        try {
-            var preparedStatement = dbConnection.getConnection().prepareStatement(sql);
-            preparedStatement.setInt(1, currentUserId);
+        try (var preparedStatement = dbConnection.getConnection().prepareStatement(sql)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String item = rs.getString("title") + " by " + rs.getString("author") +
@@ -57,4 +46,3 @@ public class PurchaseHistoryController {
         historylist.setItems(purchaseHistory);
     }
 }
-
