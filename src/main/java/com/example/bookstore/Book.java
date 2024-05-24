@@ -70,6 +70,6 @@ public class Book {
     // toString method to display Book information
     @Override
     public String toString() {
-        return title + " by " + author + " - Genre: " + genre + ", Price: $" + price + ", Quantity: " + quantity;
+        return title + " by " + author + " - Genre: " + genre + ", Price: P" + price + ", Quantity: " + quantity;
     }
 }
